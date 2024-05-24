@@ -18,9 +18,12 @@ const roomRouter = require("./router/room-router");
 
 // tackling server differences with cors
 const corsOption = {
-  origin: "http://localhost:5173",
-  methods:'GET, POST, PUT, DELETE, PATCH, HEAD',
-  credentials: true
+  origin: [
+    "http://localhost:5173", // Allow local development
+    "https://hv-frontend.vercel.app", // Allow Vercel deployment
+  ],
+  methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
+  credentials: true,
 };
 
 app.use(cors(corsOption));
