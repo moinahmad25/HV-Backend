@@ -4,10 +4,10 @@ require("dotenv").config();
 // requiring express
 const express = require("express");
 // passing instance to app
+const cors = require("cors")
 const app = express();
 
 // requiring cors
-const cors = require("cors")
 
 // requiring files
 const adminRouter  = require("./router/admin-router");
