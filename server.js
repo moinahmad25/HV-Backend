@@ -28,6 +28,9 @@ const corsOption = {
 
 app.use(cors(corsOption));
 
+app.options('*', cors(corsOption)); // Enable pre-flight for all routes
+
+
 
 // .json to parse the normal object file to json
 app.use(express.json());
