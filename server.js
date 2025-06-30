@@ -22,8 +22,9 @@ const corsOption = {
     "http://localhost:5173", // Allow local development
     "https://hv-frontend.vercel.app", // Allow Vercel deployment
   ],
-  methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
-  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 };
 
 app.use(cors(corsOption));
