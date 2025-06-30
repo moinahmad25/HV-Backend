@@ -22,18 +22,25 @@ const corsOption = {
     "http://localhost:5173", // Allow local development
     "https://hv-frontend.vercel.app", // Allow Vercel deployment
   ],
-  methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
   credentials: true,
 };
 
 app.use(cors(corsOption));
 
-app.options('*', cors(corsOption)); // Enable pre-flight for all routes
+// Handle preflight requests for all routes
+app.options('*', cors(corsOption));
 
 
 
 // .json to parse the normal object file to json
 app.use(express.json());
+
+// Health check route
+app.get('/', (req, res) => {
+  res.json({ message: 'HV Backend API is running!' });
+});
 
 // main routing for admin
 app.use("/api/admin/", adminRouter);
@@ -49,3 +56,6 @@ connectDB().then(() => {
         console.log(`app is running successfully at PORT: ${PORT}`)
     })
 })
+
+// Export the Express app for Vercel
+module.exports = app;

@@ -22,7 +22,12 @@ const uploader = multer({
 });
 
 // defining student route
-studentRouter.route("/login").post(login);
+studentRouter.route("/login").post(login).options((req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.sendStatus(200);
+});
 studentRouter.route("/:registrationNumber").get(getDetail);
 studentRouter.route("/:registrationNumber/generate-otp").post(otpGenerate);
 studentRouter
